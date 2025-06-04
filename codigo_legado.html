@@ -10,11 +10,11 @@
 
 <body>
     <div>
-        <h2><i>Corrida FIVE TURTLES</i></h2>
+        <h2><i>TurfeRace</i></h2>
     </div>
     <div>
         <div>
-            <label for="ipt_participante">Inscreva os participantes (máx. 5):</label>
+            <label for="ipt_participante">Inscreva os cavalos (máx. 6):</label>
             <br><br>
             <input type="text" id="ipt_participante" oninput="verificarMaximoParticipantes()"
                 placeholder="Insira o nome aqui">
@@ -22,11 +22,11 @@
         </div>
         <br>
         <div>
-            <label for="ipt_distancia">Escolha a distância da prova (5km a 42km):</label>
+            <label for="ipt_volta">insira o número de voltas (5 a 10):</label>
             <br><br>
-            <input type="number" id="ipt_distancia" oninput="verificarIntervaloDistancia()"
+            <input type="number" id="ipt_volta" oninput="verificarNumeroVoltas()"
                 placeholder="Insira quantos kms aqui">
-            <button onclick="cadastrarDistancia()">Escolher</button>
+            <button onclick="cadastrarVolta()">Escolher</button>
         </div>
         <br>
         <button onclick="corrida()">Dar a largada</button>
@@ -52,43 +52,46 @@
         ipt_participante.value = '';
     };
     function verificarMaximoParticipantes() {
-        if (listaParticipantes.length >= 5) {
+        if (listaParticipantes.length > 6 ) {
             ipt_participante.value = '';
-            ipt_participante.placeholder = 'Máx participantes atingido!';
+            ipt_participante.placeholder = 'A quantidade de participantes tem que ser no mínimo 2 e no máximo 6';
         }
+
     };
 
-    function cadastrarDistancia() {
-        const distancia = ipt_distancia.value;
-        if (distancia == '') {
+    function cadastrarVolta() {
+        const volta = ipt_volta.value;
+        if (volta == '') {
             return false;
         };
-        distanciaProva = distancia;
-        alert(`Prova de ${distanciaProva}Km escolhida com sucesso!`);
-        ipt_distancia.value = '';
+        distanciaProva = volta;
+        alert(`Prova de ${distanciaProva} voltas escolhida com sucesso!`);
+        ipt_volta.value = '';
     };
-    function verificarIntervaloDistancia() {
-        const distancia = ipt_distancia.value;
-        if (distancia == '') {
+    function verificarNumeroVoltas() {
+        const volta = ipt_volta.value;
+        if (volta == '') {
             return false
         }
-        if (distancia > 42) {
-            ipt_distancia.value = 42;
+        if (volta > 10) {
+            ipt_volta.value = 10;
         };
-        if (distancia < 5) {
-            ipt_distancia.value = 5;
+        if (volta < 5) {
+            ipt_volta.value = 5;
         };
     };
 
     function corrida() {
-        if (listaParticipantes.length == 0) {
-            alert('Inscreva os participantes antes de correr!');
+        const volta = ipt_volta.value;
+
+        if (listaParticipantes.length <= 1) {
+            alert('Inscreva no mínimo 2 cavalos!');
             return false;
         };
-        if (distanciaProva == 0) {
-            alert('Escolha uma distância de prova antes de correr!');
-            return false;
-        };
+        // if (volta < 5) {
+        //     alert('O número mínimo de voltas é 5!');
+        //     return false;
+        // };
 
         div_resultado.innerHTML = '';
         configurarListaTempos();
