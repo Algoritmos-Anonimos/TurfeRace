@@ -6,32 +6,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercício 18 - Lista 13</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div>
-        <h2><i>TurfeRace</i></h2>
-    </div>
-    <div>
-        <div>
-            <label for="ipt_participante">Inscreva os cavalos (máx. 6):</label>
-            <br><br>
-            <input type="text" id="ipt_participante" oninput="verificarMaximoParticipantes()"
-                placeholder="Insira o nome aqui">
-            <button onclick="cadastrarParticipante()">Inscrever</button>
-        </div>
-        <br>
-        <div>
-            <label for="ipt_volta">insira o número de voltas (5 a 10):</label>
-            <br><br>
-            <input type="number" id="ipt_volta" oninput="verificarNumeroVoltas()"
-                placeholder="Insira quantos kms aqui">
-            <button onclick="cadastrarVolta()">Escolher</button>
-        </div>
-        <br>
-        <button onclick="corrida()">Dar a largada</button>
-    </div>
-    <div id="div_resultado"></div>
+    <main>
+        <section class="section flex">
+            <div class="title flex">
+                <h1><i>TurfeRace</i></h1>
+            </div>
+            <div>
+                <div>
+                    <label for="ipt_participante">Inscreva os cavalos (2 a 6):</label>
+                    <br><br>
+                    <input type="text" id="ipt_participante" oninput="verificarMaximoParticipantes()"
+                        placeholder="Insira o nome aqui">
+                    <button onclick="cadastrarParticipante()">Inscrever</button>
+                </div>
+                <br>
+                <div>
+                    <label for="ipt_volta">insira o número de voltas (5 a 10):</label>
+                    <br><br>
+                    <input type="number" id="ipt_volta" oninput="verificarNumeroVoltas()"
+                        placeholder="Insira quantos kms aqui">
+                    <button onclick="cadastrarVolta()">Escolher</button>
+                </div>
+                <br>
+                <button onclick="corrida()">Dar a largada</button>
+            </div>
+            <div id="div_resultado"></div>
+        </section>
+    </main>
 </body>
 
 </html>
@@ -88,7 +93,9 @@
             alert('Inscreva no mínimo 2 cavalos!');
             return false;
         };
-        
+
+
+
         div_resultado.innerHTML = '';
         configurarListaTempos();
 
@@ -158,7 +165,7 @@
         <br><br>
         ---------------------------------------------------------------------------
         <br>
-        <b>Podium</b>
+        <h3>Podium</h3>
         <br>
             \t1º lugar: ${primeiro}
             <br>
@@ -180,7 +187,7 @@
         let piorVoltaKm = '';
 
         div_resultado.innerHTML += `
-        <b>Estatísticas</b>
+        <h3>Estatísticas</h3>
         <br>`;
 
         for (let i = distanciaProva; i > 0; i--) {
