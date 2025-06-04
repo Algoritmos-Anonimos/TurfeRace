@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 18 - Lista 13</title>
+</head>
+
+<body>
+    <div>
+        <h2><i>Corrida FIVE TURTLES</i></h2>
+    </div>
+    <div>
+        <div>
+            <label for="ipt_participante">Inscreva os participantes (máx. 5):</label>
+            <br><br>
+            <input type="text" id="ipt_participante" oninput="verificarMaximoParticipantes()"
+                placeholder="Insira o nome aqui">
+            <button onclick="cadastrarParticipante()">Inscrever</button>
+        </div>
+        <br>
+        <div>
+            <label for="ipt_distancia">Escolha a distância da prova (5km a 42km):</label>
+            <br><br>
+            <input type="number" id="ipt_distancia" oninput="verificarIntervaloDistancia()"
+                placeholder="Insira quantos kms aqui">
+            <button onclick="cadastrarDistancia()">Escolher</button>
+        </div>
+        <br>
+        <button onclick="corrida()">Dar a largada</button>
+    </div>
+    <div id="div_resultado"></div>
+</body>
+
+</html>
+
+<script>
+    var listaParticipantes = [];
+    var distanciaProva = 0;
+    let listaTemposVolta = [];
+    let listaTemposTotal = [];
+
+    function cadastrarParticipante() {
+        const participante = ipt_participante.value;
+        if (participante == '') {
+            return false;
+        };
+        listaParticipantes.push(participante);
+        alert(`${participante} - Competidor ${listaParticipantes.length} inscrito com sucesso`);
+        ipt_participante.value = '';
+    };
+    function verificarMaximoParticipantes() {
+        if (listaParticipantes.length >= 5) {
+            ipt_participante.value = '';
+            ipt_participante.placeholder = 'Máx participantes atingido!';
+        }
+    };
+
+    function cadastrarDistancia() {
+        const distancia = ipt_distancia.value;
+        if (distancia == '') {
+            return false;
+        };
+        distanciaProva = distancia;
+        alert(`Prova de ${distanciaProva}Km escolhida com sucesso!`);
+        ipt_distancia.value = '';
+    };
+    function verificarIntervaloDistancia() {
+        const distancia = ipt_distancia.value;
+        if (distancia == '') {
+            return false
+        }
+        if (distancia > 42) {
+            ipt_distancia.value = 42;
+        };
+        if (distancia < 5) {
+            ipt_distancia.value = 5;
+        };
+    };
+
+    function corrida() {
+        if (listaParticipantes.length == 0) {
+            alert('Inscreva os participantes antes de correr!');
+            return false;
+        };
+        if (distanciaProva == 0) {
+            alert('Escolha uma distância de prova antes de correr!');
+            return false;
+        };
+
+        div_resultado.innerHTML = '';
+        configurarListaTempos();
+
+        let tempoMelhorVoltaNesseKm = '';
+        let participanteMelhorVoltaNesseKm = '';
+
+        for (let i = 0; i < distanciaProva; i++) {
+            sortearTempoVolta();
+            if (i == (distanciaProva - 1)) { break };
+            alert(`${i + 1}ºkm de prova\nMelhor tempo: Competidor ${participanteMelhorVoltaNesseKm + 1} (${listaParticipantes[participanteMelhorVoltaNesseKm]}) - ${tempoMelhorVoltaNesseKm}min`);
+            tempoMelhorVoltaNesseKm = '';
+            participanteMelhorVoltaNesseKm = '';
+        };
+
+        exibirPodium();
+        exibirEstatisticaFinal();
+
+        function sortearTempoVolta() {
+            let num;
+            for (let i = 0; i < listaParticipantes.length; i++) {
+                num = Number(((Math.random() * 2) + 4).toFixed(1));
+                listaTemposVolta[i].push(num);
+                listaTemposTotal[i] += num;
+                if (tempoMelhorVoltaNesseKm == '' || num < tempoMelhorVoltaNesseKm) {
+                    tempoMelhorVoltaNesseKm = num;
+                    participanteMelhorVoltaNesseKm = i;
+                };
+            };
+        };
+
+        listaParticipantes = [];
+        distanciaProva = 0;
+        listaTemposVolta = [];
+        listaTemposTotal = [];
+    };
+
+    function exibirPodium() {
+        let primeiro = '';
+        let segundo = '';
+        let terceiro = '';
+
+
+        for (let i = 0; i < listaParticipantes.length; i++) {
+            if (listaTemposTotal[i] < listaTemposTotal[primeiro] || primeiro === '') {
+                primeiro = i;
+            };
+        };
+        for (let i = 0; i < listaParticipantes.length; i++) {
+            if ((listaTemposTotal[i] < listaTemposTotal[segundo] || segundo === '') && i != primeiro) {
+                segundo = i;
+            };
+        };
+        for (let i = 0; i < listaParticipantes.length; i++) {
+            if ((listaTemposTotal[i] < listaTemposTotal[terceiro] || terceiro === '') && i != primeiro && i != segundo) {
+                terceiro = i;
+            };
+        };
+
+        primeiro = listaParticipantes[primeiro];
+        segundo = listaParticipantes[segundo];
+        terceiro = listaParticipantes[terceiro];
+
+        if (segundo == undefined) { segundo = 'Não houve segundo participante' };
+        if (terceiro == undefined) { terceiro = 'Não houve terceiro participante' };
+
+        div_resultado.innerHTML += `
+        <br><br>
+        ---------------------------------------------------------------------------
+        <br>
+        <b>Podium</b>
+        <br>
+            \t1º lugar: ${primeiro}
+            <br>
+            \t2º lugar: ${segundo}
+            <br>
+            \t3º lugar: ${terceiro}
+        <br>
+        ---------------------------------------------------------------------------
+        <br><br>
+        `
+    }
+
+    function exibirEstatisticaFinal() {
+        let melhorVoltaTempo = '';
+        let piorVoltaTempo = '';
+        let melhorVoltaCompetidor = '';
+        let piorVoltaCompetidor = '';
+        let melhorVoltaKm = '';
+        let piorVoltaKm = '';
+
+        div_resultado.innerHTML += `
+        <b>Estatísticas</b>
+        <br>`;
+
+        for (let i = distanciaProva; i > 0; i--) {
+            div_resultado.innerHTML += `<br><b>${i}ºkm de prova</b><br>`
+            for (let j = 0; j < listaParticipantes.length; j++) {
+
+                if (listaTemposVolta[j][i - 1] < melhorVoltaTempo || melhorVoltaTempo == '') {
+                    melhorVoltaTempo = listaTemposVolta[j][i - 1];
+                    melhorVoltaCompetidor = listaParticipantes[j];
+                    melhorVoltaKm = i;
+                };
+                if (listaTemposVolta[j][i - 1] > piorVoltaTempo || piorVoltaTempo == '') {
+                    piorVoltaTempo = listaTemposVolta[j][i - 1];
+                    piorVoltaCompetidor = listaParticipantes[j];
+                    piorVoltaKm = i;
+                };
+                
+                div_resultado.innerHTML += `
+                \tCompetidor: ${listaParticipantes[j]} | Tempo da Volta: ${(listaTemposVolta[j][i - 1]).toFixed(1)} min | Tempo acumulado: ${(listaTemposTotal[j]).toFixed(1)} min<br>
+                `;
+
+                listaTemposTotal[j] -= listaTemposVolta[j][i - 1];
+            }
+        };
+
+        div_resultado.innerHTML += `
+        <br><b>Melhor Volta:</b> 
+            \tCompetidor: ${melhorVoltaCompetidor} | Tempo: ${(melhorVoltaTempo).toFixed(1)} min | ${melhorVoltaKm}ºkm
+        <br><b>Pior Volta:</b> 
+            \tCompetidor: ${piorVoltaCompetidor} | Tempo: ${(piorVoltaTempo).toFixed(1)} | ${piorVoltaKm}ºkm`
+    }
+
+    function configurarListaTempos() {
+        listaTemposVolta = [];
+        listaTemposTotal = [];
+        for (let i = 0; i < listaParticipantes.length; i++) {
+            listaTemposVolta.push([]);
+            listaTemposTotal.push(0);
+        };
+    }
+</script>
