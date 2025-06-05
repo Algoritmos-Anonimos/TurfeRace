@@ -28,7 +28,7 @@
                     <label for="ipt_volta">insira o número de voltas (5 a 10):</label>
                     <br><br>
                     <input type="number" id="ipt_volta" oninput="verificarNumeroVoltas()"
-                        placeholder="Insira quantos kms aqui">
+                        placeholder="Insira o numero de voltas aqui">
                     <button onclick="cadastrarVolta()">Escolher</button>
                 </div>
                 <br>
@@ -46,18 +46,37 @@
     var distanciaProva = 0;
     let listaTemposVolta = [];
     let listaTemposTotal = [];
+    let listaImagens = [];
+    
+    const gifsCavalos = [
+        "gif-cavalos/cav-albino.gif",
+        "gif-cavalos/cav-albino.gif",
+        "gif-cavalos/cav-burro.gif",
+        "gif-cavalos/cav-creme.gif",
+        "gif-cavalos/cav-normal.gif",
+        "gif-cavalos/cav-preto.gif"
+    ];
+
 
     function cadastrarParticipante() {
         const participante = ipt_participante.value;
         if (participante == '') {
+            alert('Cadastre um cavalo')
             return false;
+
         };
+        if (listaParticipantes.length >= 6) {
+            alert("Limite máximo de 6 cavalos atingido!");
+            return false;
+        }
         listaParticipantes.push(participante);
         alert(`${participante} - Competidor ${listaParticipantes.length} inscrito com sucesso`);
+        listaImagens.push(gifsCavalos[listaParticipantes.length - 1]);
         ipt_participante.value = '';
+
     };
     function verificarMaximoParticipantes() {
-        if (listaParticipantes.length > 6 ) {
+        if (listaParticipantes.length > 6) {
             ipt_participante.value = '';
             ipt_participante.placeholder = 'A quantidade de participantes tem que ser no mínimo 2 e no máximo 6';
         }
@@ -76,7 +95,8 @@
     function verificarNumeroVoltas() {
         const volta = ipt_volta.value;
         if (volta == '') {
-            return false
+            return false;
+
         }
         if (volta > 10) {
             ipt_volta.value = 10;
@@ -103,6 +123,18 @@
         let participanteMelhorVoltaNesseKm = '';
 
         for (let i = 0; i < distanciaProva; i++) {
+            div_resultado.innerHTML += `<h3>Participantes:</h3><br>`;
+
+            for (let i = 0; i < listaParticipantes.length; i++) {
+                div_resultado.innerHTML += `
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <img src="${listaImagens[i]}" width="70" height="70">
+            <span>Competidor ${i + 1}: <b>${listaParticipantes[i]}</b></span>
+        </div>
+    `;
+            }
+
+
             sortearTempoVolta();
             if (i == (distanciaProva - 1)) { break };
             alert(`${i + 1}ºkm de prova\nMelhor tempo: Competidor ${participanteMelhorVoltaNesseKm + 1} (${listaParticipantes[participanteMelhorVoltaNesseKm]}) - ${tempoMelhorVoltaNesseKm}min`);
@@ -204,7 +236,7 @@
                     piorVoltaCompetidor = listaParticipantes[j];
                     piorVoltaKm = i;
                 };
-                
+
                 div_resultado.innerHTML += `
                 \tCompetidor: ${listaParticipantes[j]} | Tempo da Volta: ${(listaTemposVolta[j][i - 1]).toFixed(1)} min | Tempo acumulado: ${(listaTemposTotal[j]).toFixed(1)} min<br>
                 `;
