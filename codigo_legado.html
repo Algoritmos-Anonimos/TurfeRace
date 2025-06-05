@@ -42,7 +42,7 @@
             </section>
             <section class="section none" id="section_resultado">
                 <div class="flex" id="div_resultado"></div>
-                <button class="pixel2" onclick="reiniciar()">Reiniciar</button>
+                <button class="pixel2" onclick="reiniciar()">Finalizar</button>
             </section>
         </main>
     </body>
@@ -181,21 +181,29 @@
         let primeiro = '';
         let segundo = '';
         let terceiro = '';
+        let cav1 = '';
+        let cav2 = '';
+        let cav3 = '';
+
 
 
         for (let i = 0; i < listaParticipantes.length; i++) {
             if (listaTemposTotal[i] < listaTemposTotal[primeiro] || primeiro === '') {
                 primeiro = i;
+                cav1 = listaImagens[i]
             };
         };
         for (let i = 0; i < listaParticipantes.length; i++) {
             if ((listaTemposTotal[i] < listaTemposTotal[segundo] || segundo === '') && i != primeiro) {
                 segundo = i;
+                cav2 = listaImagens[i]
+
             };
         };
         for (let i = 0; i < listaParticipantes.length; i++) {
             if ((listaTemposTotal[i] < listaTemposTotal[terceiro] || terceiro === '') && i != primeiro && i != segundo) {
                 terceiro = i;
+                cav3 = listaImagens[i]
             };
         };
 
@@ -210,14 +218,21 @@
         <br><br>
         ---------------------------------------------------------------------------
         <br>
-        <h3>Podium</h3>
-        <br>
-            \t1º lugar: ${primeiro}
-            <br>
-            \t2º lugar: ${segundo}
-            <br>
-            \t3º lugar: ${terceiro}
-        <br>
+         <h3>🏆 Pódio</h3><br>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div>
+            <h4>🥇 1º Lugar: ${primeiro}</h4>
+            ${cav1 ? `<img src="${cav1}" width="80" height="80">` : ''}
+        </div>
+        <div>
+            <h4>🥈 2º Lugar: ${segundo}</h4>
+            ${cav2 ? `<img src="${cav2}" width="80" height="80">` : ''}
+        </div>
+        <div>
+            <h4>🥉 3º Lugar: ${terceiro}</h4>
+            ${cav3 ? `<img src="${cav3}" width="80" height="80">` : ''}
+        </div>
+    </div>
         ---------------------------------------------------------------------------
         <br><br>
         `
