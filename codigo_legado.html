@@ -37,6 +37,10 @@
                     </div>
                 </div>
                 <div class="flex" id="div_resultado"></div>
+                <dialog id="id_modal">
+                    <div id="conteudo_model"></div>
+                    <button id="btn_fechar" onclick="fechar()">Fechar</button>
+                </dialog>
             </section>
         </main>
     </body>
@@ -59,20 +63,24 @@
         "gifs-cavalos/cav-creme.gif"
     ];
 
-
     function cadastrarParticipante() {
         const participante = ipt_participante.value;
         if (participante == '') {
-            alert('Cadastre um cavalo')
+            mostrarModal('Cadastre um cavalo')
+            return false;
+
+        };
+        if (listaParticipantes.includes(participante)) {
+            mostrarModal(`O cavalo ${participante} já foi cadastrado :(`)
             return false;
 
         };
         if (listaParticipantes.length >= 6) {
-            alert("Limite máximo de 6 cavalos atingido!");
+            mostrarModal("Limite máximo de 6 cavalos atingido!");
             return false;
         }
         listaParticipantes.push(participante);
-        alert(`${participante} - Competidor ${listaParticipantes.length} inscrito com sucesso`);
+        mostrarModal(`${participante} - Competidor ${listaParticipantes.length} inscrito com sucesso`);
         listaImagens.push(gifsCavalos[listaParticipantes.length - 1]);
         ipt_participante.value = '';
 
@@ -87,18 +95,19 @@
 
     function cadastrarVolta() {
         const volta = ipt_volta.value;
-        if (volta == '') {
+        if (volta < 0) {
+            mostrarModal(`cadastre volta`);
             return false;
         };
         distanciaProva = volta;
-        alert(`Prova de ${distanciaProva} voltas escolhida com sucesso!`);
+        mostrarModal(`Prova de ${distanciaProva} voltas escolhida com sucesso!`);
         ipt_volta.value = '';
     };
+
     function verificarNumeroVoltas() {
         const volta = ipt_volta.value;
         if (volta == '') {
             return false;
-
         }
         if (volta > 10) {
             ipt_volta.value = 10;
@@ -109,14 +118,12 @@
     };
 
     function corrida() {
-        const volta = ipt_volta.value;
+        // const volta = Number(ipt_volta.value);
 
         if (listaParticipantes.length <= 1) {
-            alert('Inscreva no mínimo 2 cavalos!');
+            mostrarModal('Inscreva no mínimo 2 cavalos!');
             return false;
         };
-
-
 
         div_resultado.innerHTML = '';
         configurarListaTempos();
@@ -125,15 +132,15 @@
         let participanteMelhorVoltaNesseKm = '';
 
         div_resultado.innerHTML += `<h3>Participantes:</h3><br>`;
-
         for (let i = 0; i < listaParticipantes.length; i++) {
             div_resultado.innerHTML += `
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-            <img src="${listaImagens[i]}" width="70" height="70">
-            <span>Competidor ${i + 1}: <b>${listaParticipantes[i]}</b></span>
+        <img src="${listaImagens[i]}" width="70" height="70">
+        <span>Competidor ${i + 1}: <b>${listaParticipantes[i]}</b></span>
         </div>
         `;
-
+        }
+        for (let i = 0; i < distanciaProva; i++) {
 
             sortearTempoVolta();
             if (i == (distanciaProva - 1)) { break };
@@ -259,5 +266,16 @@
             listaTemposVolta.push([]);
             listaTemposTotal.push(0);
         };
+    }
+</script>
+
+<script>
+    function fechar() {
+        id_modal.close();
+    }
+
+    function mostrarModal(conteudo) {
+        id_modal.showModal()
+        conteudo_model.textContent = conteudo;
     }
 </script>
