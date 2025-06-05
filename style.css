@@ -1,10 +1,60 @@
-/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css?family=VT323');
+@import url('https://fonts.cdnfonts.com/css/devin-chavez-font');
 
 * {
+    border: 1px solid black;
+}
+
+body {
+    overflow-x: hidden;
+    background: url(imgs/background1.png) no-repeat center / cover fixed;;
+}
+
+section {
+    width: 100vw;
+    height: 100vh;
+}
+
+h1, h2, h3 {
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+p, label, input {
+    font-family: 'Devin Chavez Font', sans-serif;
+}
+
+label {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.section {
+    .title {
+        width: 100%;
+        height: 20%;
+        justify-content: center;
+        align-items: center;
+    }
+    h1 {
+       font-size: 20vh;
+    }
+}
+
+
+
+/* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -25,6 +75,85 @@ main {
     width: 100%;
     max-width: 800px;
 }
+*/
+
+.container {
+  margin: 50px;
+  display: block;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.pixel2 {
+  font-size: 25px;
+  color: white;
+  height: auto;
+  margin: 10px;
+  font-family: 'VT323';
+
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pixel2:active {
+  top: 2px;
+}
+
+.pixel2 {
+  position: relative;
+  display: block;
+  margin: 10px;
+  font-family: 'VT323';
+  text-transform: uppercase;
+
+  font-size: 25px;
+  color: white;
+}
+
+.pixel2::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: -10px;
+  right: -10px;
+  background: black;
+  z-index: -1;
+}
+
+.pixel2::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: -6px;
+  right: -6px;
+  background: black;
+  z-index: -1;
+}
+
+.pixel2 {
+  padding: 10px 10px;
+  position: relative;
+  background: black;
+  width: auto;
+  z-index: 2;
+}
 
 .section.flex {
     display: flex;
@@ -34,7 +163,7 @@ main {
 }
 
 .title h1 {
-    font-size: 3rem;
+    font-size: 4.6rem;
     color: #ffe100;
     text-shadow: 2px 2px #000;
     font-style: italic;
@@ -45,11 +174,12 @@ input[type="number"] {
     padding: 10px;
     border-radius: 5px;
     border: none;
-    width: 250px;
+    width: 84%;
     font-size: 1rem;
     margin-bottom: 10px;
 }
 
+/*
 button {
     padding: 10px 20px;
     border: none;
@@ -65,11 +195,7 @@ button {
 button:hover {
     background-color: #ffd700;
 }
-
-label {
-    font-size: 1.1rem;
-    font-weight: bold;
-}
+*/
 
 #div_resultado {
     margin-top: 30px;

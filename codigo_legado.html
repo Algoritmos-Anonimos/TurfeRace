@@ -2,42 +2,44 @@
 
 <html lang="pt">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercício 18 - Lista 13</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TurfeRace</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-<body>
-    <main>
-        <section class="section flex">
-            <div class="title flex">
-                <h1><i>TurfeRace</i></h1>
-            </div>
-            <div>
-                <div>
-                    <label for="ipt_participante">Inscreva os cavalos (2 a 6):</label>
-                    <br><br>
-                    <input type="text" id="ipt_participante" oninput="verificarMaximoParticipantes()"
-                        placeholder="Insira o nome aqui">
-                    <button onclick="cadastrarParticipante()">Inscrever</button>
+    <body>
+        <main>
+            <section class="section flex">
+                <div class="title flex">
+                    <h1><i>TurfeRace</i></h1>
                 </div>
-                <br>
                 <div>
-                    <label for="ipt_volta">insira o número de voltas (5 a 10):</label>
-                    <br><br>
-                    <input type="number" id="ipt_volta" oninput="verificarNumeroVoltas()"
-                        placeholder="Insira o numero de voltas aqui">
-                    <button onclick="cadastrarVolta()">Escolher</button>
+                    <div class="flex">
+                        <label for="ipt_participante">Inscreva os cavalos (2 a 6):</label>
+                        <br><br>
+                        <input type="text" id="ipt_participante" oninput="verificarMaximoParticipantes()"
+                            placeholder="Insira o nome aqui">
+                        <button class="pixel2" onclick="cadastrarParticipante()">Inscrever</button>
+                    </div>
+                    <br>
+                    <div class="flex">
+                        <label for="ipt_volta">Insira o número de voltas (5 a 10):</label>
+                        <br><br>
+                        <input type="number" id="ipt_volta" oninput="verificarNumeroVoltas()"
+                            placeholder="Insira o numero de voltas aqui">
+                        <button class="pixel2" onclick="cadastrarVolta()">Escolher</button>
+                    </div>
+                    <br>
+                    <div class="flex">
+                        <button class="pixel2" onclick="corrida()">Dar a largada</button>
+                    </div>
                 </div>
-                <br>
-                <button onclick="corrida()">Dar a largada</button>
-            </div>
-            <div id="div_resultado"></div>
-        </section>
-    </main>
-</body>
+                <div id="div_resultado"></div>
+            </section>
+        </main>
+    </body>
 
 </html>
 
@@ -47,14 +49,14 @@
     let listaTemposVolta = [];
     let listaTemposTotal = [];
     let listaImagens = [];
-    
+
     const gifsCavalos = [
-        "gif-cavalos/cav-albino.gif",
-        "gif-cavalos/cav-albino.gif",
-        "gif-cavalos/cav-burro.gif",
-        "gif-cavalos/cav-creme.gif",
-        "gif-cavalos/cav-normal.gif",
-        "gif-cavalos/cav-preto.gif"
+        "gifs-cavalos/cav-albino.gif",
+        "gifs-cavalos/cav-albino.gif",
+        "gifs-cavalos/cav-burro.gif",
+        "gifs-cavalos/cav-creme.gif",
+        "gifs-cavalos/cav-normal.gif",
+        "gifs-cavalos/cav-preto.gif"
     ];
 
 
@@ -246,9 +248,9 @@
         };
 
         div_resultado.innerHTML += `
-        <br><b>Melhor Volta:</b> 
+        <br><b>Melhor Volta:</b>
             \tCompetidor: ${melhorVoltaCompetidor} | Tempo: ${(melhorVoltaTempo).toFixed(1)} min | ${melhorVoltaKm}ºkm
-        <br><b>Pior Volta:</b> 
+        <br><b>Pior Volta:</b>
             \tCompetidor: ${piorVoltaCompetidor} | Tempo: ${(piorVoltaTempo).toFixed(1)} | ${piorVoltaKm}ºkm`
     }
 
