@@ -11,7 +11,7 @@
 
     <body>
         <main>
-            <section class="section flex">
+            <section class="section flex" id="section_inicial">
                 <div class="title flex">
                     <h1><i>TurfeRace</i></h1>
                 </div>
@@ -36,10 +36,13 @@
                         <button class="pixel2" onclick="corrida()">Dar a largada</button>
                     </div>
                 </div>
-                <div class="flex" id="div_resultado"></div>
-                <dialog id="id_modal">
+                <dialog id="id_modal" class="modal-pixel">
                     <div id="conteudo_model"></div>
                 </dialog>
+            </section>
+            <section class="section none" id="section_resultado">
+                <div class="flex" id="div_resultado"></div>
+                <button class="pixel2" onclick="reiniciar()">Reiniciar</button>
             </section>
         </main>
     </body>
@@ -168,10 +171,10 @@
             };
         };
 
-        listaParticipantes = [];
-        distanciaProva = 0;
-        listaTemposVolta = [];
-        listaTemposTotal = [];
+        section_inicial.classList.add("none");
+        section_inicial.classList.remove("flex");
+        section_resultado.classList.add("flex");
+        section_resultado.classList.remove("none");
     };
 
     function exibirPodium() {
@@ -269,6 +272,18 @@
             listaTemposVolta.push([]);
             listaTemposTotal.push(0);
         };
+    }
+
+    function reiniciar() {;
+        section_resultado.classList.add("none");
+        section_resultado.classList.remove("flex");
+        section_inicial.classList.add("flex");
+        section_inicial.classList.remove("none");
+
+        listaParticipantes = [];
+        distanciaProva = 0;
+        listaTemposVolta = [];
+        listaTemposTotal = [];
     }
 </script>
 

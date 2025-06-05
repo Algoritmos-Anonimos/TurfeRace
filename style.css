@@ -29,7 +29,7 @@ h3 {
     font-size: 2rem;
 }
 
-p, label, input {
+p, label, input, .modal-pixel {
     font-family: 'Devin Chavez Font', sans-serif;
 }
 
@@ -42,6 +42,9 @@ label {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+}
+.none {
+    display: none;
 }
 
 .section {
@@ -202,21 +205,25 @@ button {
     button:hover {
         background-color: #ffd700;
         }
-        */
+*/
 
-        #div_resultado {
-            margin-top: 30px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            width: 100%;
-            font-size: 1rem;
-            line-height: 1.6;
-            white-space: pre-line;
-        }
+#div_resultado {
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.6;
+    white-space: pre-line;
+}
 
 
-        br {
-            display: block;
-            margin: 5px 0;
-        }
+br {
+    display: block;
+    margin: 5px 0;
+}
+
+.modal-pixel {
+    border-radius: 10px;
+}
