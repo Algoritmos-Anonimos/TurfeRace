@@ -36,7 +36,7 @@
                         <button class="pixel2" onclick="corrida()">Dar a largada</button>
                     </div>
                 </div>
-                <div id="div_resultado"></div>
+                <div class="flex" id="div_resultado"></div>
             </section>
         </main>
     </body>
@@ -52,11 +52,11 @@
 
     const gifsCavalos = [
         "gifs-cavalos/cav-albino.gif",
-        "gifs-cavalos/cav-albino.gif",
-        "gifs-cavalos/cav-burro.gif",
-        "gifs-cavalos/cav-creme.gif",
+        "gifs-cavalos/cav-preto.gif",
         "gifs-cavalos/cav-normal.gif",
-        "gifs-cavalos/cav-preto.gif"
+        "gifs-cavalos/cav-bege.gif",
+        "gifs-cavalos/cav-burro.gif",
+        "gifs-cavalos/cav-creme.gif"
     ];
 
 
@@ -124,17 +124,15 @@
         let tempoMelhorVoltaNesseKm = '';
         let participanteMelhorVoltaNesseKm = '';
 
-        for (let i = 0; i < distanciaProva; i++) {
-            div_resultado.innerHTML += `<h3>Participantes:</h3><br>`;
+        div_resultado.innerHTML += `<h3>Participantes:</h3><br>`;
 
-            for (let i = 0; i < listaParticipantes.length; i++) {
-                div_resultado.innerHTML += `
+        for (let i = 0; i < listaParticipantes.length; i++) {
+            div_resultado.innerHTML += `
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
             <img src="${listaImagens[i]}" width="70" height="70">
             <span>Competidor ${i + 1}: <b>${listaParticipantes[i]}</b></span>
         </div>
-    `;
-            }
+        `;
 
 
             sortearTempoVolta();
