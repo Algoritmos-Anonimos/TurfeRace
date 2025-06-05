@@ -39,7 +39,6 @@
                 <div class="flex" id="div_resultado"></div>
                 <dialog id="id_modal">
                     <div id="conteudo_model"></div>
-                    <button id="btn_fechar" onclick="fechar()">Fechar</button>
                 </dialog>
             </section>
         </main>
@@ -95,8 +94,8 @@
 
     function cadastrarVolta() {
         const volta = ipt_volta.value;
-        if (volta < 0) {
-            mostrarModal(`cadastre volta`);
+        if (volta < 1 || volta == '') {
+            mostrarModal(`Faltou cadastrar a volta em!!`);
             return false;
         };
         distanciaProva = volta;
@@ -118,10 +117,14 @@
     };
 
     function corrida() {
-        // const volta = Number(ipt_volta.value);
+        
 
         if (listaParticipantes.length <= 1) {
             mostrarModal('Inscreva no mínimo 2 cavalos!');
+            return false;
+        }; 
+        if (distanciaProva == 0) {
+            mostrarModal('Faltou cadastrar a volta em!!');
             return false;
         };
 
@@ -270,12 +273,14 @@
 </script>
 
 <script>
-    function fechar() {
-        id_modal.close();
-    }
+
+
 
     function mostrarModal(conteudo) {
         id_modal.showModal()
         conteudo_model.textContent = conteudo;
+        setTimeout(() => {
+        id_modal.close();
+      }, 1500);
     }
 </script>
