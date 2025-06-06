@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=VT323');
 @import url('https://fonts.cdnfonts.com/css/devin-chavez-font');
 
-* {
+/* * {
     border: 1px solid black;
-}
+} */
 
 body {
     overflow-x: hidden;
@@ -16,7 +16,7 @@ section {
     height: 100vh;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: "Jersey 10", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -29,7 +29,7 @@ h3 {
     font-size: 2rem;
 }
 
-p, label, input, .modal-pixel {
+p, label, input, span, b, .modal-pixel {
     font-family: 'Devin Chavez Font', sans-serif;
 }
 
