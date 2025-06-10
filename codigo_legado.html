@@ -161,7 +161,7 @@
         function sortearTempoVolta() {
             let num;
             for (let i = 0; i < listaParticipantes.length; i++) {
-                num = Number(((Math.random() * 2) + 4).toFixed(1));
+                num = Number(((Math.random() * 2) + 7).toFixed(1));
                 listaTemposVolta[i].push(num);
                 listaTemposTotal[i] += num;
                 if (tempoMelhorVoltaNesseKm == '' || num < tempoMelhorVoltaNesseKm) {
