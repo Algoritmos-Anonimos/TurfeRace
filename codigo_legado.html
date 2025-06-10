@@ -120,12 +120,12 @@
     };
 
     function corrida() {
-        
+
 
         if (listaParticipantes.length <= 1) {
             mostrarModal('Inscreva no mínimo 2 cavalos!');
             return false;
-        }; 
+        };
         if (distanciaProva == 0) {
             mostrarModal('Faltou cadastrar a volta em!!');
             return false;
@@ -218,7 +218,7 @@
         <br><br>
         ---------------------------------------------------------------------------
         <br>
-         <h3>🏆 Pódio</h3><br>
+        <h3>🏆 Pódio</h3><br>
     <div style="display: flex; align-items: center; gap: 20px;">
         <div>
             <h4>🥇 1º Lugar: ${primeiro}</h4>
@@ -265,19 +265,19 @@
                     piorVoltaKm = i;
                 };
 
-                div_resultado.innerHTML += `
+                div_resultado.innerHTML += `<span>
                 \tCompetidor: ${listaParticipantes[j]} | Tempo da Volta: ${(listaTemposVolta[j][i - 1]).toFixed(1)} min | Tempo acumulado: ${(listaTemposTotal[j]).toFixed(1)} min<br>
-                `;
+                </span>`;
 
                 listaTemposTotal[j] -= listaTemposVolta[j][i - 1];
             }
         };
 
         div_resultado.innerHTML += `
-        <br><b>Melhor Volta:</b>
+        <br><span><b>Melhor Volta:</b>
             \tCompetidor: ${melhorVoltaCompetidor} | Tempo: ${(melhorVoltaTempo).toFixed(1)} min | ${melhorVoltaKm}ºkm
         <br><b>Pior Volta:</b>
-            \tCompetidor: ${piorVoltaCompetidor} | Tempo: ${(piorVoltaTempo).toFixed(1)} | ${piorVoltaKm}ºkm`
+            \t<span>Competidor: ${piorVoltaCompetidor} | Tempo: ${(piorVoltaTempo).toFixed(1)} | ${piorVoltaKm}ºkm</span>`
     }
 
     function configurarListaTempos() {
@@ -289,7 +289,8 @@
         };
     }
 
-    function reiniciar() {;
+    function reiniciar() {
+        ;
         section_resultado.classList.add("none");
         section_resultado.classList.remove("flex");
         section_inicial.classList.add("flex");
@@ -310,7 +311,7 @@
         id_modal.showModal()
         conteudo_model.textContent = conteudo;
         setTimeout(() => {
-        id_modal.close();
-      }, 1500);
+            id_modal.close();
+        }, 1500);
     }
 </script>
